@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThrowStone : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class ThrowStone : MonoBehaviour
         yield return new WaitForSeconds(TimeStart * Time.deltaTime);
         while (enableStones)
         {
+            if (GameManager.countThrows >= 10) {
+                SceneManager.LoadScene(0);
+            }
             GameObject stone = (GameObject)Instantiate(gameObjects[Random.Range(0, gameObjects.Length)]);
             stone.transform.position = new Vector3(Random.Range(minX, maxX), -30f, Random.Range(minZ, maxX));
             stone.transform.rotation = Random.rotation;
